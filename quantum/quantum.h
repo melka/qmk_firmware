@@ -162,6 +162,10 @@ extern layer_state_t layer_state;
 #    include "oled_driver.h"
 #endif
 
+#ifdef NRF24_DRIVER_ENABLE
+#    include "nrf24.h"
+#endif
+
 #ifdef DIP_SWITCH_ENABLE
 #    include "dip_switch.h"
 #endif

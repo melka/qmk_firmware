@@ -80,6 +80,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef OLED_DRIVER_ENABLE
 #    include "oled_driver.h"
 #endif
+#ifdef NRF24_DRIVER_ENABLE
+#    include "nrf24.h"
+#endif
 #ifdef VELOCIKEY_ENABLE
 #    include "velocikey.h"
 #endif
