@@ -18,9 +18,10 @@ enum outputs {
     OUTPUT_NONE,
     OUTPUT_USB,
     OUTPUT_BLUETOOTH,
-
+    OUTPUT_NRF24,
     // backward compatibility
-    OUTPUT_USB_AND_BT
+    OUTPUT_USB_AND_BT,
+    OUTPUT_USB_AND_NRF24
 };
 
 /**
@@ -29,6 +30,8 @@ enum outputs {
 #ifndef OUTPUT_DEFAULT
 #    ifdef BLUETOOTH_ENABLE
 #        define OUTPUT_DEFAULT OUTPUT_USB_AND_BT
+#    elif NRF24_ENABLE
+#        define OUTPUT_DEFAULT OUTPUT_USB_AND_NRF24
 #    else
 #        define OUTPUT_DEFAULT OUTPUT_AUTO
 #    endif

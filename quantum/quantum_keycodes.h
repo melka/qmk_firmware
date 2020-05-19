@@ -446,6 +446,10 @@ enum quantum_keycodes {
     OUT_BT,
 #endif
 
+#ifdef NRF24_ENABLE
+    OUT_NRF24,
+#endif
+
 #ifdef KEY_LOCK_ENABLE
     KC_LOCK,
 #endif

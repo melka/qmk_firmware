@@ -332,6 +332,17 @@ bool process_record_quantum(keyrecord_t *record) {
                 set_output(OUTPUT_BLUETOOTH);
                 return false;
 #endif
+#ifdef NRF24_ENABLE
+            case OUT_AUTO:
+                set_output(OUTPUT_AUTO);
+                return false;
+            case OUT_USB:
+                set_output(OUTPUT_USB);
+                return false;
+            case OUT_NRF24:
+                set_output(OUTPUT_NRF24);
+                return false;
+#endif
         }
     }
 

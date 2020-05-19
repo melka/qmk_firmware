@@ -445,7 +445,6 @@ endif
 ifeq ($(strip $(NRF24_DRIVER_ENABLE)), yes)
     OPT_DEFS += -DNRF24_DRIVER_ENABLE
     COMMON_VPATH += $(DRIVER_PATH)/nrf24
-	include $(DRIVER_PATH)/nrf24/nrf24.mk
     QUANTUM_LIB_SRC += spi_master.c
     SRC += nrf24.c
 endif

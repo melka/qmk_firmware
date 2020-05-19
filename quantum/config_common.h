@@ -330,6 +330,12 @@
 #    endif
 #endif
 
+#ifdef NRF24_ENABLE
+#    ifndef __AVR_ATmega32U4__
+#        error "NRF24 Module not supported on anything else than ATmega32U4 for the moment."
+#    endif
+#endif
+
 #define API_SYSEX_MAX_SIZE 32
 
 #include "song_list.h"

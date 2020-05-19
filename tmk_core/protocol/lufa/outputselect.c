@@ -54,6 +54,10 @@ uint8_t auto_detect_output(void) {
     return OUTPUT_BLUETOOTH;  // should check if BT is connected here
 #endif
 
+#ifdef NRF24_ENABLE
+    return OUTPUT_NRF24;  // should check if BT is connected here
+#endif
+
     return OUTPUT_NONE;
 }
 

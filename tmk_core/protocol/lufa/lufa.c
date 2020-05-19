@@ -73,6 +73,10 @@ extern keymap_config_t keymap_config;
 #    endif
 #endif
 
+#ifdef NRF24_ENABLE
+    #include "nrf24.h"
+#endif
+
 #ifdef VIRTSER_ENABLE
 #    include "virtser.h"
 #endif
@@ -579,7 +583,13 @@ static void send_keyboard(report_keyboard_t *report) {
     }
 #endif
 
-    if (where != OUTPUT_USB && where != OUTPUT_USB_AND_BT) {
+#ifdef NRF24_ENABLE
+    if (where == OUTPUT_NRF24 || where == OUTPUT_USB_AND_NRF24) {
+        nrf24_send_keys(report->mods, report->keys, sizeof(report->keys));
+    }
+#endif
+
+    if (where != OUTPUT_USB && where != OUTPUT_USB_AND_BT && where != OUTPUT_USB_AND_NRF24) {
         return;
     }
 

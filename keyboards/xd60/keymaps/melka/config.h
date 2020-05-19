@@ -18,3 +18,6 @@
 
 #define LSPO_KEYS KC_LSFT, KC_TRNS, KC_5
 #define RSPC_KEYS KC_RSFT, KC_TRNS, KC_MINS
+
+// #define NRF24_CE F7
+// #define NRF24_CS F4
