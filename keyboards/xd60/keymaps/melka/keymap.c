@@ -1,4 +1,3 @@
-//#include "action_layer.h"
 #include QMK_KEYBOARD_H
 
 /*
@@ -152,13 +151,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
   case PASS_A:
     if (record->event.pressed)
     {
-      SEND_STRING(PASSWORD_A SS_TAP(X_ENTER));
+      SEND_STRING(PASSWORD_A "\n");
     }
     break;
   case PASS_B:
     if (record->event.pressed)
     {
-      SEND_STRING(PASSWORD_B SS_TAP(X_ENTER));
+      SEND_STRING(PASSWORD_B "\n");
     }
     break;
   }
