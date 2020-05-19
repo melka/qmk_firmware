@@ -45,7 +45,7 @@ ifeq ($(strip $(BLUETOOTH)), RN42)
 endif
 
 ifeq ($(strip $(NRF24_ENABLE)), yes)
-	include $(LIB_PATH)/rf24/Makefile
+	LUFA_SRC += $(LIB_PATH)/rf24/RF24.cpp
 	LUFA_SRC += spi_master.c
 	LUFA_SRC += $(LUFA_DIR)/nrf24.cpp
 endif
