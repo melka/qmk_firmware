@@ -44,6 +44,11 @@ ifeq ($(strip $(BLUETOOTH)), RN42)
 	$(TMK_DIR)/protocol/serial_uart.c
 endif
 
+ifeq ($(strip $(NRF24_ENABLE)), yes)
+	LUFA_SRC += spi_master.c
+	LUFA_SRC += $(LUFA_DIR)/nrf24.cpp
+endif
+
 ifeq ($(strip $(VIRTSER_ENABLE)), yes)
 	LUFA_SRC += $(LUFA_ROOT_PATH)/Drivers/USB/Class/Device/CDCClassDevice.c
 endif

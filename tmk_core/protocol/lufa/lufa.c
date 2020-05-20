@@ -73,6 +73,10 @@ extern keymap_config_t keymap_config;
 #    endif
 #endif
 
+#ifdef NRF24_ENABLE
+#    include "nrf24.h"
+#endif
+
 #ifdef VIRTSER_ENABLE
 #    include "virtser.h"
 #endif
@@ -947,6 +951,10 @@ int main(void) {
 
 #if defined(MODULE_ADAFRUIT_EZKEY) || defined(MODULE_RN42)
     serial_init();
+#endif
+
+#ifdef NRF24_ENABLE
+    nrf24_init();
 #endif
 
     /* wait for USB startup & debug output */

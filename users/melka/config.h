@@ -18,3 +18,6 @@
 
 #define LSPO_KEYS KC_LSFT, KC_TRNS, KC_5
 #define RSPC_KEYS KC_RSFT, KC_TRNS, KC_MINS
+
+#define QMK_ESC_OUTPUT F0 // usually COL
+#define QMK_ESC_INPUT D0 // usually ROW
