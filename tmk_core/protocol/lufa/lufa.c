@@ -583,7 +583,13 @@ static void send_keyboard(report_keyboard_t *report) {
     }
 #endif
 
-    if (where != OUTPUT_USB && where != OUTPUT_USB_AND_BT) {
+#ifdef NRF24_ENABLE
+    if (where == OUTPUT_NRF24 || where == OUTPUT_USB_AND_NRF24) {
+        nrf24_send_keys(report->mods, report->keys, sizeof(report->keys));
+    }
+#endif
+
+    if (where != OUTPUT_USB && where != OUTPUT_USB_AND_BT && where != OUTPUT_USB_AND_NRF24) {
         return;
     }
 
@@ -953,10 +959,6 @@ int main(void) {
     serial_init();
 #endif
 
-#ifdef NRF24_ENABLE
-    nrf24_init();
-#endif
-
     /* wait for USB startup & debug output */
 
 #ifdef WAIT_FOR_USB
@@ -1002,6 +1004,10 @@ int main(void) {
 
 #ifdef MODULE_ADAFRUIT_BLE
         adafruit_ble_task();
+#endif
+
+#ifdef NRF24_ENABLE
+        nrf24_task();
 #endif
 
 #ifdef VIRTSER_ENABLE

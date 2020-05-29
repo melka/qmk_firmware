@@ -23,6 +23,9 @@ typedef enum { RF24_CRC_DISABLED = 0, RF24_CRC_8, RF24_CRC_16 } rf24_crclength_e
 #define rf24_max(a,b) (a>b?a:b)
 #define rf24_min(a,b) (a<b?a:b)
 
+#define NRF24_TX_DELAY_2MBPS 65
+#define NRF24_TX_DELAY_250KBPS 155
+
 /**
   *
   * The driver will delay for this duration when stopListening() is called
@@ -36,26 +39,8 @@ typedef enum { RF24_CRC_DISABLED = 0, RF24_CRC_8, RF24_CRC_16 } rf24_crclength_e
   */
 uint32_t txDelay;
 
-bool nrf24_init(void);
-
-bool nrf24_setDataRate(rf24_datarate_e speed);
-void nrf24_setRetries(uint8_t delay, uint8_t count);
-void nrf24_disableCRC(void);
-void nrf24_powerUp(void);
-void nrf24_toggleFeatures(void);
-void nrf24_setChannel(uint8_t channel);
-
-void nrf24_end_transaction(void);
-void nrf24_begin_transaction(void);
-
-spi_status_t nrf24_read_register_len(uint8_t reg, uint8_t* buf, uint8_t len);
-spi_status_t nrf24_read_register(uint8_t reg);
-
-spi_status_t nrf24_write_register_len(uint8_t reg, const uint8_t* buf, uint8_t len);
-spi_status_t nrf24_write_register(uint8_t reg, uint8_t value);
-
-spi_status_t nrf24_flush_rx(void);
-spi_status_t nrf24_flush_tx(void);
-
-spi_status_t nrf24_spi_trans(uint8_t cmd);
-
+extern void nrf24_task(void);
+extern bool nrf24_enable_keyboard(void);
+extern bool nrf24_send_keys(uint8_t hid_modifier_mask, uint8_t *keys, uint8_t nkeys);
+extern bool nrf24_pair(void);
+extern bool nrf24_is_paired(void);

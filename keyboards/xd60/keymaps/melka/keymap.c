@@ -1,4 +1,6 @@
 #include QMK_KEYBOARD_H
+#include "outputselect.h"
+#include "nrf24.h"
 
 /*
 Security Note: While it is possible to use macros to send passwords, credit card numbers,
@@ -8,7 +10,8 @@ of your keyboard will be able to access that information by opening a text edito
 enum custom_keycodes
 {
   PASS_A = SAFE_RANGE,
-  PASS_B
+  PASS_B,
+  NRF_PAIR
 };
 
 #define ___ KC_NO
@@ -30,11 +33,11 @@ enum custom_keycodes
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // 0: Base Layer
     LAYOUT_melka(
-      KC_NUBS,  KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_MINS,    KC_EQL,     KC_DEL,     KC_BSPC,
+      RESET,  KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_MINS,    KC_EQL,     KC_DEL,     KC_BSPC,
       KC_TAB,   KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_LBRC,    KC_RBRC,    KC_ENT,
       KC_CAPS,  KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,    KC_BSLS,
       MT(KC_LSFT, KC_5),  KC_GRV,     KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    MT(KC_RSFT, KC_MINS),    KC_UP,      MO(1),
-      KC_LCTL,  KC_LALT,    KC_LGUI,                                        KC_SPC,                                         KC_RGUI,    KC_RALT,    KC_LEFT,  KC_DOWN,      KC_RIGHT),
+      NRF_PAIR,  KC_LALT,    KC_LGUI,                                        KC_SPC,                                         KC_RGUI,    KC_RALT,    KC_LEFT,  KC_DOWN,      KC_RIGHT),
 
   // 1: Function Layer
   LAYOUT_melka(
@@ -61,53 +64,62 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,  _______,    _______,                                        _______,                                        KC_P0,      KC_P0,      KC_PDOT,    KC_PENT,    _______)
 };
 
-// Light LEDs 6 to 9 and 12 to 15 red when caps lock is active. Hard to ignore!
-const rgblight_segment_t PROGMEM rgb_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {2, 4, HSV_RED},       // Light 4 LEDs, starting with LED 6
-    {6, 4, HSV_RED}       // Light 4 LEDs, starting with LED 12
-);
-// Light LEDs 9 & 10 in cyan when keyboard layer 1 is active
-const rgblight_segment_t PROGMEM rgb_function_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {9, 2, HSV_CYAN}
-);
-// Light LEDs 11 & 12 in purple when keyboard layer 2 is active
-const rgblight_segment_t PROGMEM rgb_backlight_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {10, 2, HSV_PURPLE}
-);
-const rgblight_segment_t PROGMEM rgb_keypad_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {4, 4, HSV_RED}
-);
-// Now define the array of layers. Later layers take precedence
-const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    rgb_capslock_layer,
-    rgb_function_layer,
-    rgb_backlight_layer,    // Overrides caps lock layer
-    rgb_keypad_layer     // Overrides other layers
-);
+// // Light LEDs 6 to 9 and 12 to 15 red when caps lock is active. Hard to ignore!
+// const rgblight_segment_t PROGMEM rgb_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+//     {2, 4, HSV_RED},       // Light 4 LEDs, starting with LED 6
+//     {6, 4, HSV_RED}       // Light 4 LEDs, starting with LED 12
+// );
+// // Light LEDs 9 & 10 in cyan when keyboard layer 1 is active
+// const rgblight_segment_t PROGMEM rgb_function_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+//     {9, 2, HSV_CYAN}
+// );
+// // Light LEDs 11 & 12 in purple when keyboard layer 2 is active
+// const rgblight_segment_t PROGMEM rgb_backlight_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+//     {10, 2, HSV_PURPLE}
+// );
+// const rgblight_segment_t PROGMEM rgb_keypad_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+//     {4, 4, HSV_RED}
+// );
+// // Now define the array of layers. Later layers take precedence
+// const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+//     rgb_capslock_layer,
+//     rgb_function_layer,
+//     rgb_backlight_layer,    // Overrides caps lock layer
+//     rgb_keypad_layer     // Overrides other layers
+// );
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-    // Both layers will light up if both kb layers are active
-    rgblight_set_layer_state(1, layer_state_cmp(state, 1));
-    rgblight_set_layer_state(2, layer_state_cmp(state, 2));
-    return state;
-}
+// layer_state_t layer_state_set_user(layer_state_t state) {
+//     // Both layers will light up if both kb layers are active
+//     rgblight_set_layer_state(1, layer_state_cmp(state, 1));
+//     rgblight_set_layer_state(2, layer_state_cmp(state, 2));
+//     return state;
+// }
 
-bool led_update_user(led_t led_state) {
-    rgblight_set_layer_state(0, led_state.caps_lock);
-    return true;
-}
+// bool led_update_user(led_t led_state) {
+//     rgblight_set_layer_state(0, led_state.caps_lock);
+//     return true;
+// }
 
-void keyboard_post_init_user(void) {
-    // Enable the LED layers
-    rgblight_layers = rgb_layers;
-}
-// Loop
-void matrix_scan_user(void) {
-  // Empty
-};
+// void keyboard_post_init_user(void) {
+//     // Enable the LED layers
+//     rgblight_layers = rgb_layers;
+// }
+// // Loop
+// void matrix_scan_user(void) {
+//   // Empty
+// };
 
 static bool control_disabled = false;
 static bool delete_pressed = false;
+
+void keyboard_post_init_user(void) {
+//   debug_enable=true;
+}
+
+void matrix_init_user() {
+    wait_ms(500); // give time for usb to initialize
+    set_output(OUTPUT_NRF24);
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
@@ -148,18 +160,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
 
   switch (keycode)
   {
-  case PASS_A:
-    if (record->event.pressed)
-    {
-      SEND_STRING(PASSWORD_A "\n");
-    }
-    break;
-  case PASS_B:
-    if (record->event.pressed)
-    {
-      SEND_STRING(PASSWORD_B "\n");
-    }
-    break;
+    case PASS_A:
+        if (record->event.pressed)
+        {
+        SEND_STRING(PASSWORD_A "\n");
+        }
+        break;
+    case PASS_B:
+        if (record->event.pressed)
+        {
+            SEND_STRING(PASSWORD_B "\n");
+        }
+        break;
+    #ifdef NRF24_ENABLE
+    case NRF_PAIR:
+        if (record->event.pressed && !nrf24_is_paired())
+        {
+            nrf24_pair();
+        }
+        break;
+    #endif
   }
   return true;
 }
