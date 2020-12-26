@@ -31,8 +31,6 @@ Ported to QMK by Peter Roe <pete@13bit.me>
 #include "led.h"
 #include "timer.h"
 
-static bool is_iso_layout = false;
-
 // matrix state buffer(1:on, 0:off)
 static matrix_row_t matrix[MATRIX_ROWS];
 
@@ -221,13 +219,13 @@ uint8_t matrix_scan(void)
          * *b      ----    0x32    ----    0x64
          * *c      0x2A    0x2A    0x31    0x31(or 0x32)
          */
-        if (is_iso_layout) {
-            if ((key0 & 0x7F) == 0x32) {
-                key0 = (key0 & 0x80) | 0x0A;
-            } else if ((key0 & 0x7F) == 0x0A) {
-                key0 = (key0 & 0x80) | 0x32;
-            }
+        #ifdef ADB_IS_ISO_LAYOUT
+        if ((key0 & 0x7F) == 0x32) {
+            key0 = (key0 & 0x80) | 0x0A;
+        } else if ((key0 & 0x7F) == 0x0A) {
+            key0 = (key0 & 0x80) | 0x32;
         }
+        #endif
         register_key(key0);
         if (key1 != 0xFF)       // key1 is 0xFF when no second key.
             extra_key = key1<<8 | 0xFF; // process in a separate call
