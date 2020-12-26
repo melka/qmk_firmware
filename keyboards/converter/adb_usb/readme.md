@@ -67,6 +67,15 @@ Locking Caps Lock
 Many old ADB keyboards use a locking switch for the caps lock key. This converter supports the locking caps lock key by default.
 
 
+ISO Layout
+----------
+If your board has an iso layout, add this line to your config.h
+
+```
+#define ADB_IS_ISO_LAYOUT
+```
+
+
 Notes
 -----
 Non-extended ADB keyboards make no distinction between the left and right modifiers,
