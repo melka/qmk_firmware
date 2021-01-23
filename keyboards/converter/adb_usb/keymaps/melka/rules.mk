@@ -1,5 +1,5 @@
 # MCU name
-MCU = atmega16u2
+MCU = atmega32u4
 
 # Bootloader selection
 #   Teensy       halfkay
@@ -15,10 +15,8 @@ BOOTLOADER = caterina
 #   comment out to disable the options.
 #
 USB_HID_ENABLE   = no
-COMMAND_ENABLE   = no # Commands for debug and configuration
+COMMAND_ENABLE   = yes # Commands for debug and configuration
 EXTRAKEY_ENABLE  = yes
 MOUSEKEY_ENABLE  = no
-CONSOLE_ENABLE	 = no
-UNICODE_ENABLE   = no # Unicode
-
-EXTRAFLAGS += -flto
+CONSOLE_ENABLE	 = yes
+LTO_ENABLE		 = yes

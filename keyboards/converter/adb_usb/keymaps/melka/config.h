@@ -13,14 +13,12 @@
 #define ADB_IS_ISO_LAYOUT
 
 #define DISABLE_LEADER
-// #define NO_ACTION_MACRO
-// #define NO_ACTION_FUNCTION
-#define NO_ACTION_TAPPING
+// #define NO_ACTION_TAPPING
 #define NO_ACTION_ONESHOT
 
-#ifndef NO_DEBUG
-#define NO_DEBUG
-#endif // !NO_DEBUG
-#if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
-#define NO_PRINT
-#endif // !NO_PRINT
+// #ifndef NO_DEBUG
+// #define NO_DEBUG
+// #endif // !NO_DEBUG
+// #if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
+// #define NO_PRINT
+// #endif // !NO_PRINT
