@@ -1,5 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "keymap_french_osx.h"
+#include "sendstring_french_osx.h"
 
 #define _BASE 0
 #define _FUNC 1
@@ -13,7 +14,21 @@ enum custom_keycodes
 {
   PASS_A = SAFE_RANGE,
   PASS_B,
-  BSP_DEL
+  BSP_DEL,
+  EMO_NICE,
+  EMO_THIS,
+  EMO_QEQ,
+  EMO_FROGLOVE,
+  EMO_CRIPES,
+  EMO_SHARKY,
+  EMO_CLAP,
+  EMO_THUNK,
+  EMO_THINKIES,
+  EMO_100,
+  EMO_OOF,
+  EMO_HEART,
+  EMO_FLUSHED,
+  EMO_EYES
 };
 
 /* M0118 Apple Standard Keyboard French ISO
@@ -184,7 +199,7 @@ enum custom_keycodes
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_AEKII_iso_fr(
-        KC_ESC,  KC_BRID, KC_BRIU,KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_MPRV,KC_MPLY, KC_MNXT,KC_MUTE, KC_VOLD, KC_VOLU,                KC_PSCR,KC_SLCK, KC_PAUS,                               LT(_FUNC, RESET),
+        KC_ESC,  EMO_NICE, EMO_THIS, EMO_QEQ, EMO_THINKIES,  EMO_100,  EMO_OOF, EMO_HEART, EMO_EYES, EMO_FROGLOVE,EMO_SHARKY, EMO_CLAP, EMO_FLUSHED,                KC_MUTE,KC_VOLD, KC_VOLU,                               LT(_FUNC, RESET),
         FR_AT,   KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,    KC_9,   KC_0,    FR_RPRN, FR_MINS, BSP_DEL,       KC_INS, KC_HOME, KC_PGUP,     KC_NLCK, KC_EQL, KC_PSLS, KC_PAST,
         KC_TAB,  FR_A,    FR_Z,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,   KC_P,    FR_CIRC, FR_DLR,  KC_ENT,        KC_DEL, KC_END,  KC_PGDN,     KC_P7,   KC_P8,  KC_P9,   KC_PMNS,
         KC_LCAP, FR_Q,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,    KC_L,   FR_M,    FR_UGRV,          FR_GRV,                                      KC_P4,   KC_P5,  KC_P6,   KC_PPLS,
@@ -192,7 +207,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL, KC_LALT, KC_LGUI,                KC_SPC,                                  KC_RALT, KC_RCTL,                         KC_LEFT, KC_DOWN, KC_RGHT,    KC_P0,           KC_PDOT, KC_PENT
     ),
     [_FUNC] = LAYOUT_AEKII_iso_fr(
-        KC_ESC,  KC_BRID, KC_BRIU,KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_MPRV,KC_MPLY, KC_MNXT,KC_MUTE, KC_VOLD, KC_VOLU,                KC_PSCR,KC_SLCK, KC_PAUS,                               KC_EJCT,
+        KC_ESC,  KC_F1,   KC_F2,  KC_F3,  KC_F4,     KC_F5,  KC_F6,  KC_F7,  KC_F8,    KC_F9,  KC_F10, KC_F11, KC_F12,               KC_PSCR,KC_SLCK, KC_PAUS,                               KC_EJCT,
         FR_AT,   KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,    KC_9,   KC_0,    FR_RPRN, FR_MINS, BSP_DEL,       KC_INS, KC_HOME, KC_PGUP,     KC_NLCK, KC_EQL, KC_PSLS, KC_PAST,
         KC_TAB,  FR_A,    FR_Z,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,   KC_P,    FR_CIRC, FR_DLR,  KC_ENT,        KC_DEL, KC_END,  KC_PGDN,     KC_P7,   KC_P8,  KC_P9,   KC_PMNS,
         KC_LCAP, FR_Q,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,    KC_L,   FR_M,    FR_UGRV,          FR_GRV,                                      KC_P4,   KC_P5,  KC_P6,   KC_PPLS,
@@ -239,6 +254,78 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case PASS_B:
         if (record->event.pressed) {
             SEND_STRING(PASSWORD_B "\n");
+        }
+        return false;
+
+
+    case EMO_NICE:
+        if (record->event.pressed) {
+            SEND_STRING(":nice:");
+        }
+        return false;
+    case EMO_THIS:
+        if (record->event.pressed) {
+            SEND_STRING(":this:");
+        }
+        return false;
+    case EMO_QEQ:
+        if (record->event.pressed) {
+            SEND_STRING(":qeq:");
+        }
+        return false;
+    case EMO_FROGLOVE:
+        if (record->event.pressed) {
+            SEND_STRING(":froglove:");
+        }
+        return false;
+    case EMO_CRIPES:
+        if (record->event.pressed) {
+            SEND_STRING(":cripes:");
+        }
+        return false;
+    case EMO_SHARKY:
+        if (record->event.pressed) {
+            SEND_STRING(":sharky:");
+        }
+        return false;
+    case EMO_CLAP:
+        if (record->event.pressed) {
+            SEND_STRING(":clap:");
+        }
+        return false;
+    case EMO_THUNK:
+        if (record->event.pressed) {
+            SEND_STRING(":thunk:");
+        }
+        return false;
+    case EMO_THINKIES:
+        if (record->event.pressed) {
+            SEND_STRING(":thinkies:");
+        }
+        return false;
+    case EMO_100:
+        if (record->event.pressed) {
+            SEND_STRING(":100:");
+        }
+        return false;
+    case EMO_OOF:
+        if (record->event.pressed) {
+            SEND_STRING(":oof:");
+        }
+        return false;
+    case EMO_HEART:
+        if (record->event.pressed) {
+            SEND_STRING(":heart:");
+        }
+        return false;
+    case EMO_FLUSHED:
+        if (record->event.pressed) {
+            SEND_STRING(":flushed:");
+        }
+        return false;
+    case EMO_EYES:
+        if (record->event.pressed) {
+            SEND_STRING(":eyes:");
         }
         return false;
     default:
