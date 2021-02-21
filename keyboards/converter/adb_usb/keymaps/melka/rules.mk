@@ -15,8 +15,8 @@ BOOTLOADER = caterina
 #   comment out to disable the options.
 #
 USB_HID_ENABLE   = no
-COMMAND_ENABLE   = yes # Commands for debug and configuration
+COMMAND_ENABLE   = no # Commands for debug and configuration
 EXTRAKEY_ENABLE  = yes
 MOUSEKEY_ENABLE  = no
-CONSOLE_ENABLE	 = yes
+CONSOLE_ENABLE	 = no
 LTO_ENABLE		 = yes
