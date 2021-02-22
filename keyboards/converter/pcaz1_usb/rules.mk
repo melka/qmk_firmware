@@ -26,6 +26,6 @@ BLUETOOTH_ENABLE = no       # Enable Bluetooth
 AUDIO_ENABLE = no           # Audio output
 ENCODER_ENABLE = yes
 
-CUSTOM_MATRIX = lite
+CUSTOM_MATRIX = yes
 
 SRC += matrix.c

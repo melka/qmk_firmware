@@ -23,35 +23,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VENDOR_ID    0xFEED
 #define PRODUCT_ID   0x0000
 #define DEVICE_VER   0x0001
-#define MANUFACTURER Kamel Makhloufi
-#define PRODUCT      pcaz1_usb
+#define MANUFACTURER Rohde & Schwarz
+#define PRODUCT      PCA-Z1
 
 /* key matrix size */
 #define MATRIX_ROWS 12
 #define MATRIX_COLS 8
 
-#define LED_CLK_PIN         B12
-#define LED_NUM_LOCK_PIN    B5
-#define LED_CAPS_LOCK_PIN   B6
-#define LED_ENC_H_PIN       B3
-#define LED_ENC_V_PIN       B4
+                                // Future remap for easier port manipulation / cleaner code
 
-#define ENCODERS_PAD_A { B14 }
-#define ENCODERS_PAD_B { B15 }
+#define LED_CLK_PIN         B12 // PB9
+#define LED_NUM_LOCK_PIN    B5  // PB12
+#define LED_CAPS_LOCK_PIN   B6  // PB13
+#define LED_ENC_H_PIN       B3  // PB14
+#define LED_ENC_V_PIN       B4  // PB15
 
-#define MATRIX_MUX_A A0
-#define MATRIX_MUX_B A1
-#define MATRIX_MUX_C A2
-#define MATRIX_MUX_D A3
+#define ENCODERS_PAD_A { B14 }  // PB7
+#define ENCODERS_PAD_B { B15 }  // PB8
 
-#define MATRIX_COL_0 A4
-#define MATRIX_COL_1 A5
-#define MATRIX_COL_2 A6
-#define MATRIX_COL_3 A7
-#define MATRIX_COL_4 B0
-#define MATRIX_COL_5 B1
-#define MATRIX_COL_6 C15
-#define MATRIX_COL_7 B10
+#define MATRIX_MUX_A A0     // PB3
+#define MATRIX_MUX_B A1     // PB4
+#define MATRIX_MUX_C A2     // PB5
+#define MATRIX_MUX_D A3     // PB6
+
+#define MATRIX_ROW_0 A4     // A0
+#define MATRIX_ROW_1 A5     // A1
+#define MATRIX_ROW_2 A6     // A2
+#define MATRIX_ROW_3 A7     // A3
+#define MATRIX_ROW_4 B0     // A4
+#define MATRIX_ROW_5 B1     // A5
+#define MATRIX_ROW_6 C15    // A6
+#define MATRIX_ROW_7 B10    // A7
 
 // #define LED_SCROLL_LOCK_PIN B2
 // #define LED_COMPOSE_PIN B3

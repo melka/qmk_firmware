@@ -23,43 +23,23 @@ enum layer_names {
     _FN
 };
 
-// Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes {
-    QMKBEST = SAFE_RANGE,
-    QMKURL
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base */
     [_BASE] = LAYOUT(
-        KC_F1 , KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8,   KC_F9, KC_F10,                                                                       \
-        KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_CIRC, KC_BSLS, KC_BSPC,     KC_HOME,KC_UP  ,KC_VOLU, XXX,       \
-        KC_TAB,   KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_AT, KC_LBRC, KC_RBRC, KC_ENT,      KC_LEFT,KC_P5  ,KC_RIGHT,KC_PMNS,   \
-        XXX, XXX,  KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_COLN, KC_L,                    KC_MUTE,KC_DOWN,KC_VOLD, KC_PENT,   \
-        XXX, XXX ,  KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, XXX, KC_B,                  KC_P0,  KC_PDOT,                    \
-                                            KC_SPC,                                                                                                     \
-        KC_MS_L,KC_MS_R,        KC_MS_D,KC_MS_U,        KC_WH_D,KC_WH_U                                                                                 \
+        XXX , XXX , XXX , XXX , XXX , XXX , XXX , XXX ,    XXX , XXX,                       \
+                                                                                         \
+        XXX ,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX, XXX ,     XXX,XXX,XXX,XXX, \
+        XXX  ,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,      XXX,XXX,XXX,XXX, \
+        XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,              XXX,XXX,XXX,XXX, \
+        XXX,XXX ,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX,XXX, XXX, XXX,           XXX , XXX ,      \
+                                             XXX                                                                             \
     )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case QMKBEST:
-            if (record->event.pressed) {
-                // when keycode QMKBEST is pressed
-                SEND_STRING("QMK is the best thing ever!");
-            } else {
-                // when keycode QMKBEST is released
-            }
-            break;
-        case QMKURL:
-            if (record->event.pressed) {
-                // when keycode QMKURL is pressed
-                SEND_STRING("https://qmk.fm/\n");
-            } else {
-                // when keycode QMKURL is released
-            }
-            break;
-    }
-    return true;
+  // If console is enabled, it will print the matrix position and status of each key pressed
+#ifdef CONSOLE_ENABLE
+    uprintf("KL: kc: 0x%04X, col: %u, row: %u, pressed: %b, time: %u, interrupt: %b, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+#endif
+  return true;
 }
