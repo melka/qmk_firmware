@@ -1,5 +1,5 @@
 # MCU name
-MCU = atmega32u4
+MCU = atmega16u2
 
 # Bootloader selection
 #   Teensy       halfkay
@@ -9,14 +9,11 @@ MCU = atmega32u4
 #   QMK DFU      qmk-dfu
 #   ATmega32A    bootloadHID
 #   ATmega328P   USBasp
-BOOTLOADER = caterina
+BOOTLOADER = qmk-dfu
 
 # Build Options
 #   comment out to disable the options.
 #
-USB_HID_ENABLE   = no
-COMMAND_ENABLE   = no # Commands for debug and configuration
-EXTRAKEY_ENABLE  = yes
-MOUSEKEY_ENABLE  = no
-CONSOLE_ENABLE	 = no
+EXTRAKEY_ENABLE  = no
+NO_USB_STARTUP_CHECK = yes
 LTO_ENABLE		 = yes
