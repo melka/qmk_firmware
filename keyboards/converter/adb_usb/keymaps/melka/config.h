@@ -18,9 +18,9 @@
 #define PRODUCT         adbtiny
 
 #define DISABLE_LEADER
-#define NO_ACTION_TAPPING // Introduces a problem, not sure what it is
+#define NO_ACTION_TAPPING
 #define NO_ACTION_ONESHOT
-// #define TAPPING_FORCE_HOLD
+#define TAPPING_FORCE_HOLD
 
 #ifndef NO_DEBUG
 #define NO_DEBUG
