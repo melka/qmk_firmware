@@ -14,6 +14,6 @@ BOOTLOADER = qmk-dfu
 # Build Options
 #   comment out to disable the options.
 #
-EXTRAKEY_ENABLE  = no
+EXTRAKEY_ENABLE  = yes
 NO_USB_STARTUP_CHECK = yes
 LTO_ENABLE		 = yes
