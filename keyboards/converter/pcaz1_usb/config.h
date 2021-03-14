@@ -27,33 +27,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT      PCA-Z1
 
 /* key matrix size */
-#define MATRIX_ROWS 12
+#define MATRIX_ROWS 16
 #define MATRIX_COLS 8
 
-                                // Future remap for easier port manipulation / cleaner code
+#define ENCODERS_PAD_A { B7 }
+#define ENCODERS_PAD_B { B8 }
 
-#define LED_CLK_PIN         B12 // PB9
-#define LED_NUM_LOCK_PIN    B5  // PB12
-#define LED_CAPS_LOCK_PIN   B6  // PB13
-#define LED_ENC_H_PIN       B3  // PB14
-#define LED_ENC_V_PIN       B4  // PB15
+#define LED_CLK_PIN         B9
+#define LED_ENC_H_PIN       B12
+#define LED_ENC_V_PIN       B13
+#define LED_NUMLOCK_PIN     B14
+#define LED_CAPSLOCK_PIN    B15
 
-#define ENCODERS_PAD_A { B14 }  // PB7
-#define ENCODERS_PAD_B { B15 }  // PB8
+#define MATRIX_MUX_A B3
+#define MATRIX_MUX_B B4
+#define MATRIX_MUX_C B5
+#define MATRIX_MUX_D B6
 
-#define MATRIX_MUX_A A0     // PB3
-#define MATRIX_MUX_B A1     // PB4
-#define MATRIX_MUX_C A2     // PB5
-#define MATRIX_MUX_D A3     // PB6
-
-#define MATRIX_ROW_0 A4     // A0
-#define MATRIX_ROW_1 A5     // A1
-#define MATRIX_ROW_2 A6     // A2
-#define MATRIX_ROW_3 A7     // A3
-#define MATRIX_ROW_4 B0     // A4
-#define MATRIX_ROW_5 B1     // A5
-#define MATRIX_ROW_6 C15    // A6
-#define MATRIX_ROW_7 B10    // A7
+#define MATRIX_ROW_0 A0
+#define MATRIX_ROW_1 A1
+#define MATRIX_ROW_2 A2
+#define MATRIX_ROW_3 A3
+#define MATRIX_ROW_4 A4
+#define MATRIX_ROW_5 A5
+#define MATRIX_ROW_6 A6
+#define MATRIX_ROW_7 A7
 
 // #define LED_SCROLL_LOCK_PIN B2
 // #define LED_COMPOSE_PIN B3

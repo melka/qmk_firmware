@@ -54,16 +54,21 @@
     K40,K41 ,K42,K43,K44,K45,K46,K47,K48,K49,K4A,K4B, K4C, K4D,         K5C , K5D ,      \
                              K4E                                                         \
 ) { \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
-    {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }  \
+    /*           0      1      2      3      4      5      6      7   */ \
+    /* 0  */ {  XXX ,  XXX ,  K40 ,  K53 ,  K31 ,  K30 ,  K4C ,  K41  }, \
+    /* 1  */ {  K07 ,  K06 ,  K05 ,  K04 ,  K03 ,  K02 ,  K01 ,  K00  }, \
+    /* 2  */ {  K36 ,  K35 ,  K23 ,  K34 ,  K44 ,  K46 ,  K32 ,  K2B  }, \
+    /* 3  */ {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
+    /* 4  */ {  K17 ,  K16 ,  K15 ,  K14 ,  K13 ,  K12 ,  K11 ,  K1A  }, \
+    /* 5  */ {  K50 ,  K56 ,  K55 ,  K54 ,  K5A ,  K59 ,  K58 ,  K5C  }, \
+    /* 6  */ {  K22 ,  K45 ,  K27 ,  K25 ,  K33 ,  K24 ,  K21 ,  K2A  }, \
+    /* 7  */ {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
+    /* 8  */ {  XXX ,  K4E ,  K10 ,  K5B ,  K2E ,  K3D ,  K20 ,  K4D  }, \
+    /* 9  */ {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  K09 ,  K08  }, \
+    /* 10 */ {  K29 ,  K47 ,  K48 ,  K3A ,  K39 ,  K38 ,  K28 ,  K37  }, \
+    /* 11 */ {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }, \
+    /* 12 */ {  K4B ,  K4A ,  K1B ,  K49 ,  K3B ,  K3C ,  K19 ,  K18  }, \
+    /* 13 */ {  XXX ,  XXX ,  XXX ,  XXX ,  K5D ,  K57 ,  K52 ,  K51  }, \
+    /* 14 */ {  K1E ,  K1C ,  K2D ,  K1D ,  K2C ,  K42 ,  K26 ,  K43  }, \
+    /* 15 */ {  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX ,  XXX  }  \
 }

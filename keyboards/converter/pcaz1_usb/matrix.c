@@ -26,7 +26,6 @@ static matrix_row_t matrix[MATRIX_ROWS];
 static void setRow(int col);
 static uint8_t scanRow(int col);
 static void initPins(void);
-static void strobeLeds(void);
 static int invertPin(long unsigned int pin);
 
 __attribute__ ((weak))
@@ -59,7 +58,6 @@ void matrix_init(void) {
     debug_matrix=true;
 
     initPins();
-    strobeLeds();
 }
 
 uint8_t matrix_scan(void) {
@@ -73,12 +71,7 @@ uint8_t matrix_scan(void) {
 }
 
 void matrix_print(void){
-    print("\nr/c 0123456789ABCDEF\n");
-    for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
-        phex(row); print(": ");
-        pbin_reverse16(matrix_get_row(row));
-        print("\n");
-    }
+    // DO NOTHING
 }
 
 inline
@@ -87,9 +80,32 @@ matrix_row_t matrix_get_row(uint8_t row)
     return matrix[row];
 }
 
+bool led_update_kb(led_t led_state) {
+    bool res = led_update_user(led_state);
+
+    if(res) {
+#ifdef CONSOLE_ENABLE
+        uprintf("Led state : alpha: %d, num: %d, kana: %d, compose: %d\n", led_state.num_lock, led_state.caps_lock, led_state.kana, led_state.compose);
+#endif
+        writePin(LED_NUMLOCK_PIN, !led_state.num_lock);
+        writePin(LED_CAPSLOCK_PIN, !led_state.caps_lock);
+        // Strobe output
+        writePinHigh(LED_CLK_PIN);
+        wait_ms(5);
+        writePinLow(LED_CLK_PIN);
+    }
+
+    return res;
+}
+
 // Initializes pins state
 inline
 static void initPins(void) {
+    setPinOutput(LED_ENC_H_PIN);
+    setPinOutput(LED_ENC_V_PIN);
+    setPinOutput(LED_NUMLOCK_PIN);
+    setPinOutput(LED_CAPSLOCK_PIN);
+
     setPinOutput(LED_CLK_PIN);
     writePinLow(LED_CLK_PIN);
 
@@ -106,14 +122,6 @@ static void initPins(void) {
     setPinInput(MATRIX_ROW_5);
     setPinInput(MATRIX_ROW_6);
     setPinInput(MATRIX_ROW_7);
-}
-
-// Needed to update the LEDs state
-inline
-static void strobeLeds(void) {
-    writePinHigh(LED_CLK_PIN);
-    wait_ms(10);
-    writePinLow(LED_CLK_PIN);
 }
 
 // Pins are inactive High, so we invert the state when reading
@@ -197,6 +205,30 @@ static void setRow(int row) {
             writePinLow(MATRIX_MUX_C);
             writePinHigh(MATRIX_MUX_D);
             break;
+        case 12 :
+            writePinLow(MATRIX_MUX_A);
+            writePinLow(MATRIX_MUX_B);
+            writePinHigh(MATRIX_MUX_C);
+            writePinHigh(MATRIX_MUX_D);
+            break;
+        case 13 :
+            writePinHigh(MATRIX_MUX_A);
+            writePinLow(MATRIX_MUX_B);
+            writePinHigh(MATRIX_MUX_C);
+            writePinHigh(MATRIX_MUX_D);
+            break;
+        case 14 :
+            writePinLow(MATRIX_MUX_A);
+            writePinHigh(MATRIX_MUX_B);
+            writePinHigh(MATRIX_MUX_C);
+            writePinHigh(MATRIX_MUX_D);
+            break;
+        case 15 :
+            writePinHigh(MATRIX_MUX_A);
+            writePinHigh(MATRIX_MUX_B);
+            writePinHigh(MATRIX_MUX_C);
+            writePinHigh(MATRIX_MUX_D);
+            break;
         default :
             writePinLow(MATRIX_MUX_A);
             writePinLow(MATRIX_MUX_B);
@@ -209,7 +241,7 @@ static void setRow(int row) {
 inline
 static uint8_t scanRow(int row) {
     setRow(row);
-    wait_ms(10);
+    wait_ms(1);
 
     uint8_t res = 0;
     res |= (invertPin(MATRIX_ROW_0) << 7);
